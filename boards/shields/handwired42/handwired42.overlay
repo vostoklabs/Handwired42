@@ -5,6 +5,7 @@
  *
  * Pins are given as raw nRF52840 GPIOs (&gpio0 = P0.xx, &gpio1 = P1.xx) so they
  * match the wiring list 1:1. Pro Micro names are in the comments.
+ * Col 0 is the RIGHT-most column, Col 11 the LEFT-most (flipped in .dtsi).
  *
  * Diodes: col2row (columns are driven, rows are read), same as the Diplomat.
  * If NO keys register at all, the diodes are the other way round: change

@@ -29,26 +29,27 @@ Built the same way as the Diplomat48: ZMK v0.3, Bluetooth + USB, battery reporti
 
 Diodes are **col2row** (same as the Diplomat).
 
-| Matrix | nRF52840 pin | nice!nano label |
-|---|---|---|
-| Row 0 | P0.29 | D20 |
-| Row 1 | P0.02 | D19 |
-| Row 2 | P1.15 | D18 |
-| Row 3 | P1.13 | D15 |
-| Col 0 | P0.22 | D4 |
-| Col 1 | P0.24 | D5 |
-| Col 2 | P1.00 | D6 |
-| Col 3 | P0.11 | D7 |
-| Col 4 | P1.04 | D8 |
-| Col 5 | P1.06 | D9 |
-| Col 6 | P1.01 | extra pad |
-| Col 7 | P1.02 | extra pad |
-| Col 8 | P1.07 | extra pad |
-| Col 9 | P0.09 | D10 (NFC pin, freed in firmware) |
-| Col 10 | P0.10 | D16 (NFC pin, freed in firmware) |
-| Col 11 | P1.11 | D14 |
+| Matrix | nRF52840 pin | nice!nano label | Keys (looking at the keyboard) |
+|---|---|---|---|
+| Row 0 | P0.29 | D20 | Esc … Bksp |
+| Row 1 | P0.02 | D19 | Tab … Enter |
+| Row 2 | P1.15 | D18 | Shift … Del |
+| Row 3 | P1.13 | D15 | Ctrl, thumbs, Alt |
+| Col 0 | P0.22 | D4 | right-most: Bksp / Enter / Del / Alt |
+| Col 1 | P0.24 | D5 | P / ; / / |
+| Col 2 | P1.00 | D6 | O / L / . |
+| Col 3 | P0.11 | D7 | I / K / , |
+| Col 4 | P1.04 | D8 | U / J / M / Raise |
+| Col 5 | P1.06 | D9 | Y / H / N / Space |
+| Col 6 | P1.01 | extra pad | T / G / B / Space |
+| Col 7 | P1.02 | extra pad | R / F / V / Lower |
+| Col 8 | P1.07 | extra pad | E / D / C |
+| Col 9 | P0.09 | D10 (NFC pin, freed in firmware) | W / S / X |
+| Col 10 | P0.10 | D16 (NFC pin, freed in firmware) | Q / A / Z |
+| Col 11 | P1.11 | D14 | left-most: Esc / Tab / Shift / Ctrl |
 
-Col 0 is the left-most column. The bottom row only uses columns 0, 4, 5, 6, 7 and 11.
+The columns are wired mirrored (Col 0 is on the right), and the matrix transform
+in `handwired42.dtsi` flips them back, same as the Diplomat.
 
 ## Getting the firmware
 
@@ -72,7 +73,12 @@ then hold **Lower + Raise and press Enter** to unlock. Keys can be remapped live
   `boards/shields/handwired42/handwired42.overlay` change `diode-direction` to `"row2col"`
   and move `GPIO_PULL_DOWN` from the row pins to the column pins.
 - **Keys come out mirrored left↔right** → reverse each row in
-  `boards/shields/handwired42/handwired42.dtsi` (`RC(r,11) … RC(r,0)`).
+  `boards/shields/handwired42/handwired42.dtsi` (already done for this build).
+- **One key types two rows at once (e.g. Q also types A), on every column** → the two
+  row wires are shorted together. Firmware can't cause this. Check for a solder
+  bridge between the two row pins on the controller (Row 0 = D20 and Row 1 = D19 sit
+  right next to each other), or two row wires / diode legs touching. With the
+  board unplugged, a multimeter on continuity between the two row pins must NOT beep.
 - **Only one column dead** → check that wire / pin in the table above.
 - **Studio changes look wrong after editing the keymap file** → in Studio, use
   "Restore Stock Settings" so it reloads the keymap from the firmware.
