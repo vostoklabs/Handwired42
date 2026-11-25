@@ -1,0 +1,7 @@
+if SHIELD_HANDWIRED42
+
+# Bluetooth name. Must be less than 16 characters long!
+config ZMK_KEYBOARD_NAME
+    default "Handwired42"
+
+endif

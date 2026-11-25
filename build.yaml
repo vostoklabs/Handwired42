@@ -1,0 +1,14 @@
+# This file generates the GitHub Actions matrix.
+---
+include:
+  # Main firmware: nice!nano v2 / nRF52840 SuperMini, with ZMK Studio (USB + BLE).
+  - board: nice_nano_v2
+    shield: handwired42
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: handwired42
+
+  # Flash this first if the board was used with other firmware before,
+  # or whenever Bluetooth pairing gets stuck.
+  - board: nice_nano_v2
+    shield: settings_reset
