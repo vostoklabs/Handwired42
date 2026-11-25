@@ -46,7 +46,7 @@ Diodes are **col2row** (same as the Diplomat).
 | Col 8 | P1.07 | extra pad | E / D / C |
 | Col 9 | P0.09 | D10 (NFC pin, freed in firmware) | W / S / X |
 | Col 10 | P0.10 | D16 (NFC pin, freed in firmware) | Q / A / Z |
-| Col 11 | P1.11 | D14 | left-most: Esc / Tab / Shift / Ctrl |
+| Col 11 | P0.20 | D3 | left-most: Esc / Tab / Shift / Ctrl (moved off P1.11 / D14) |
 
 The columns are wired mirrored (Col 0 is on the right), and the matrix transform
 in `handwired42.dtsi` flips them back, same as the Diplomat.
